@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<data-sources> <!--источники данных к БД. Как правило, это организация пула соедине-ний. 
+			Пример приведен в конце раздела -->
+	</data-sources>
+	<!-- ========== Form Bean Definitions -->
+	<form-beans>
+		<form-bean name="loginForm" type="by.bsu.famcs.jspservlet.LoginForm" />
+	</form-beans>
+	<!-- ============== Global Exception Definitions (если есть) -->
+	<global-exceptions>
+	</global-exceptions> <!-- ============== Global Forward Definitions(если есть) -->
+	<global-forwards>
+	</global-forwards>
+	<!-- =============== Action Mapping Definitions -->
+	<action-mappings>
+		<!-- Action для процесса логина -->
+		<!-- <action name="loginForm" path="/login" scope="request" type="by.bsu.famcs.jspservlet.LoginAction" 
+			validate="false"> форварды на JSP, доступные из данного action <forward name="loginAgain" 
+			path="/WEB-INF/jsp/login.jsp" /> <forward name="success" path="/WEB-INF/jsp/main.jsp" 
+			/> </action> -->
+		<action name="loginForm" path="/login" scope="request"
+			type="org.springframework.web.struts.DelegatingActionProxy" validate="false">
+			<!-- форварды на JSP, доступные из данного action -->
+			<forward name="loginAgain" path="/WEB-INF/jsp/login.jsp" />
+			<forward name="success" path="/WEB-INF/jsp/main.jsp" />
+		</action>
+	</action-mappings>
+	<!-- =================== Message Resources Definitions --> <!-- имя файла ресурсов .properties, в котором будет храниться вся статическая 
+		текстовая информация для приложения. Путь берется относительно папки classes. -->
+	<message-resources parameter="ApplicationResources" />
+	<!-- чуть что убрать -->
+	<plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+		<set-property property="contextConfigLocation" value="/WEB-INF/spring-beans.xml" />
+	</plug-in>
+
+</struts-config>
