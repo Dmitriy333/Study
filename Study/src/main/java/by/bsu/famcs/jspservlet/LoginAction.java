@@ -34,7 +34,6 @@ public class LoginAction extends Action {
 				saveErrors(request, errors);
 			}
 		}
-		// загрузка формы для логина
 		return mapping.findForward("loginAgain");
 	}
 }
